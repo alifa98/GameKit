@@ -12,13 +12,13 @@ https://pypi.org/user/gamekit/
 In the game theory, we deal with problems like finding equilibrium, evolutionarily stable strategies, stable matching, fair division, bankruptcy, voting, etc. In this package, we are implementing the algorithms proposed for these problems. For example, a function that finds the stable matching for marriage problem with the Gale-Shapley algorithm.
 
 ## Can I contribute to this repository?
-This package is not limited to one group or university. We would be glad if you contributed to this package even by creating an issue and requesting a new feature. You are always welcome to make a bug report, open an improvement suggestion issue, or send pull requests. Moreover, you can implement the `new feature` issues that have not been assigned and send pull requests. (We will announce the contributing procedure, but for now, you should always send your pull requests for the `dev` branch.)
+This package is not limited to one group or university. We would be glad if you contributed to this package even by creating an issue and requesting a new feature. You are always welcome to make a bug report, open an improvement suggestion issue, or send pull requests. Moreover, you can implement the `new feature` issues that [have not been assigned](https://github.com/alifa98/GameKit/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee) and send pull requests. (We will announce the contributing procedure, but for now, you should always send your pull requests for the `dev` branch.)
 https://github.com/alifa98/GameKit/issues
 
 ## What are your references?
 Our primary source is  **Game Theory, Alive** book [online version](https://homes.cs.washington.edu/~karlin/GameTheoryBook.pdf)
 
-If you can understand Persian, you can watch Dr. Erfan Salavati Game theory videos on aparat.com, which are based on the **Game Theory, Alive** book. [Playlist](https://www.aparat.com/playlist/1487532) if you are not, you can use thousands of videos on youtube.
+If you understand Persian, you can watch Dr. Erfan Salavati Game theory videos on aparat.com, which are based on the **Game Theory, Alive** book ([Playlist](https://www.aparat.com/playlist/1487532)). And, If you do not, you can use thousands of videos on youtube.
 
 ## Who are you?
 Currently, This package is developing by some students of the [Faculty of Mathematics and Computer Sciences](https://math.aut.ac.ir/) and [
