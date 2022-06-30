@@ -1,0 +1,19 @@
+[project]
+name = "gamekit_alifa98"
+version = "0.0.2"
+authors = [
+  { name="Ali Faraji", email="ali@01d.ir" },
+]
+description = "A toolkit for Game Theory"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: GNU License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/alifa98/GameKit"
+"Bug Tracker" = "https://github.com/alifa98/GameKit/issues"
