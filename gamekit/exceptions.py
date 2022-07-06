@@ -1,5 +1,5 @@
 
-class NegativeNumberException(object):
+class NegativeNumberException(Exception):
 
     message = "Numbers should not be negative."
 
