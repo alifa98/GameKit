@@ -19,7 +19,7 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
         asset (float): total amount of our assets (non-negative)
     Returns:
         list: list of allocations
-        r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the asset itself.)
+        r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the largest claim value.)
     """
 
     # checks
@@ -30,7 +30,7 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
         raise NegativeNumberException("Asset cannot be a negative number.")
 
     if sum(claims) <= asset:
-        return claims, asset
+        return claims, max(claims)
     else:
 
         equal_alloc = asset/len(claims)

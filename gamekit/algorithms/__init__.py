@@ -1,3 +1,5 @@
 
 
-from gamekit.algorithms import *
+from gamekit.algorithms.bankruptcy import *
+
+
