@@ -7,7 +7,7 @@ division rules for solving bankruptcy problem.
 from gamekit import NegativeNumberException
 
 
-def constrained_equal_awards(claims: list, asset: float) -> list:
+def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
     """
     This function returns a list of allocations based onthe constrained equal allocation method.
     If the asset is larger than the sum of claims, returns the claims list itself.
@@ -16,7 +16,7 @@ def constrained_equal_awards(claims: list, asset: float) -> list:
 
     Parameters:
         claims (list): list of claims (list of non-negative float numbers)
-
+        asset (float): total amount of our assets (non-negative)
     Returns:
         list: list of allocations
         r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the asset itself.)
@@ -29,24 +29,24 @@ def constrained_equal_awards(claims: list, asset: float) -> list:
     if asset < 0:
         raise NegativeNumberException("Asset cannot be a negative number.")
 
-    if(sum(claims) <= asset):
+    if sum(claims) <= asset:
         return claims, asset
     else:
 
         equal_alloc = asset/len(claims)
 
         if all(c >= equal_alloc for c in claims):
-            return [equal_alloc for c in range(len(claims))], equal_alloc
+            return [equal_alloc for _ in range(len(claims))], equal_alloc
 
         else:
             r = min(claims)
-            allocations = [r for i in range(len(claims))]
+            allocations = [r for _ in range(len(claims))]
 
-            while(asset > sum(allocations)):
+            while asset > sum(allocations):
 
                 remained_claims = [c - r for c in claims]
 
-                # r_prime: the next best amount to to allocate to all
+                # r_prime: the next best amount to allocate to all
                 r_prime = min(c for c in remained_claims if c > 0)
                 positive_remained_claim_length = len(
                     list(filter(lambda x: (x > 0), remained_claims))
