@@ -55,7 +55,7 @@ def test_non_negative_asset():
         allocations, r = constrained_equal_awards(claims, asset)
 
 
-def test_non_negative_asset():
+def test_non_negative_claims():
     with pytest.raises(NegativeNumberException, match="Claims cannot be a negative number."):
         claims = [50, -24, 68]
         asset = 25
