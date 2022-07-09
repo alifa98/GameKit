@@ -1,5 +1,3 @@
-
-
 """
 division rules for solving bankruptcy problem.
 """
@@ -9,7 +7,7 @@ from gamekit import NegativeNumberException
 
 def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
     """
-    This function returns a list of allocations based onthe constrained equal allocation method.
+    This function returns a list of allocations based on the constrained equal allocation method.
     If the asset is larger than the sum of claims, returns the claims list itself.
 
     See: https://en.wikipedia.org/wiki/Constrained_equal_awards
@@ -19,7 +17,7 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
         asset (float): total amount of our assets (non-negative)
     Returns:
         list: list of allocations
-        r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the asset itself.)
+        r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the largest claim value.)
     """
 
     # checks
@@ -30,10 +28,10 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
         raise NegativeNumberException("Asset cannot be a negative number.")
 
     if sum(claims) <= asset:
-        return claims, asset
+        return claims, max(claims)
     else:
 
-        equal_alloc = asset/len(claims)
+        equal_alloc = asset / len(claims)
 
         if all(c >= equal_alloc for c in claims):
             return [equal_alloc for _ in range(len(claims))], equal_alloc
@@ -60,10 +58,48 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
                 else:
                     # there is not any limitation by claims, so we divide assets equally among remained claims
                     r_prime = (asset - sum(allocations)) / \
-                        positive_remained_claim_length
+                              positive_remained_claim_length
                     for i in range(len(claims)):
                         if remained_claims[i] > 0:
                             allocations[i] += r_prime
                     r += r_prime
 
             return allocations, r
+
+
+def CEA(claims: list, asset: float) -> tuple[list, float]:
+    """
+    equal to the `constrained_equal_awards` function.
+    """
+    return constrained_equal_awards(claims, asset)
+
+
+def constrained_equal_losses(claims: list, asset: float) -> tuple[list, float]:
+    """
+    This function returns a list of allocations based on the constrained equal loss method.
+    If the asset is larger than the sum of claims, returns the claims list itself.
+
+    See: https://en.wikipedia.org/wiki/Constrained_equal_losses
+
+    Parameters:
+        claims (list): list of claims (list of non-negative float numbers)
+        asset (float): total amount of our assets (non-negative)
+    Returns:
+        list: list of allocations
+        r: the r value in the $a_i = max(0, c_i-r) $ (if sum of claims become less than asset, then the r-value would be 0.)
+    """
+    # checks
+    if any(c < 0 for c in claims):
+        raise NegativeNumberException("Claims cannot be a negative number.")
+
+    if asset < 0:
+        raise NegativeNumberException("Asset cannot be a negative number.")
+
+    total_loss = sum(claims) - asset
+
+    if total_loss <= 0:
+        return claims, 0
+
+    losses, r = constrained_equal_awards(claims, total_loss)
+
+    return [claim - loss for claim, loss in zip(claims, losses)], r
