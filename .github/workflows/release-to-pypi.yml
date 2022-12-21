@@ -17,12 +17,9 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Extract version from tag
-        uses: damienaicheh/extract-version-from-tag-action@v1.0.0
-
-      - name: Create VersionFile from extracted versions
+      - name: Create VersionFile from extracted versions ## delete the first letter "v" from the tag name
         run: |
-          echo "$MAJOR.$MINOR.$PATCH" > VersionFile
+          echo ${GITHUB_REF_NAME#?} > VersionFile
 
       - name: Build source and wheel distributions
         run: |
