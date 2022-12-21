@@ -1,5 +1,5 @@
 [project]
-name = "gamekit"
+name = "gameTheory"
 dynamic = ["version", "readme", "dependencies"]
 authors = [
   {name="Ali Faraji", email="ali@01d.ir" },
