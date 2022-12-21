@@ -1,11 +1,10 @@
 [project]
-name = "gamekit_alifa98"
-version = "0.0.2"
+name = "gamekit"
+dynamic = ["version", "readme", "dependencies"]
 authors = [
-  { name="Ali Faraji", email="ali@01d.ir" },
+  {name="Ali Faraji", email="ali@01d.ir" },
 ]
-description = "A toolkit for Game Theory"
-readme = "README.md"
+description = "A library for Game Theory"
 license = { file="LICENSE" }
 requires-python = ">=3.7"
 classifiers = [
@@ -13,6 +12,16 @@ classifiers = [
     "License :: GNU License",
     "Operating System :: OS Independent",
 ]
+
+[tool.setuptools.dynamic]
+version = {file = "VersionFile"}
+readme = {file = ["README.md"]}
+dependencies = {file = "requirements.txt"}
+
+[tool.setuptools.packages.find]
+where = ["gamekit"]
+include = ["gamekit*"]
+exclude = ["gamekit*.tests.*"]
 
 [project.urls]
 "Homepage" = "https://github.com/alifa98/GameKit"
