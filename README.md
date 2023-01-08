@@ -4,7 +4,11 @@
 This is a python package for game theory-related algorithms.
 
 ## How can I install this?
-Currently, this repository is under development, so you cannot install this directly from PyPI, but that would be a simple `pip install` command in the future after our first stable release. (for now, you can clone the repository and build manually.)
+Currently, this repository is under development.
+
+To install:
+
+`pip install gameTheory`
 
 ## What do you mean by a library for game theory?
 In game theory, we deal with problems like finding equilibrium, evolutionarily stable strategies, stable matching, fair division, bankruptcy, voting, etc. In this package, we are implementing the algorithms proposed for these problems. For example, a function that finds the stable matching for marriage problem with the Gale-Shapley algorithm.
