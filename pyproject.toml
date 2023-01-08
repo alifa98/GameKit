@@ -1,6 +1,8 @@
 [project]
 name = "gameTheory"
-dynamic = ["version", "readme", "dependencies"]
+
+# vesioning - manually
+version = "0.0.5"
 authors = [
   {name="Ali Faraji", email="ali@01d.ir" },
 ]
@@ -10,10 +12,11 @@ requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
+    'Intended Audience :: Science/Research',
 ]
 
 [tool.setuptools.dynamic]
-version = {file = "VersionFile"}
+# version = {file = "VersionFile"}
 readme = {file = ["README.md"]}
 dependencies = {file = "requirements.txt"}
 
