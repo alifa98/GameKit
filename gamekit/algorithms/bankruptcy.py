@@ -1,5 +1,5 @@
 """
-division rules for solving bankruptcy problem.
+Module for division rules for solving bankruptcy problems.
 """
 
 from gamekit import NegativeNumberException
@@ -7,86 +7,86 @@ from gamekit import NegativeNumberException
 
 def constrained_equal_awards(claims, asset):
     """
-    This function returns a list of allocations based on the constrained equal allocation method.
+    Calculate allocations using the constrained equal awards method.
+    
     If the asset is larger than the sum of claims, returns the claims list itself.
 
-    See: https://en.wikipedia.org/wiki/Constrained_equal_awards
+    Parameters
+    ----------
+    claims : list
+        A list of claims. Each element of the list is a non-negative float number.
+    asset : float
+        The total amount of available assets. This is a non-negative number.
 
-    Parameters:
-        claims (list): list of claims (list of non-negative float numbers)
-        asset (float): total amount of our assets (non-negative)
-    Returns:
-        list: list of allocations
-        r: the r value in the $a_i = min(r, c_i) $ (if sum of claims become less than asset, then the r-value would be the largest claim value.)
+    Returns
+    -------
+    list
+        A list of allocations.
+    float
+        The r value in the equation a_i = min(r, c_i). If the sum of claims is less than the asset,
+        then the r-value is the maximum claim value.
     """
 
-    # checks
+    
     if any(c < 0 for c in claims):
         raise NegativeNumberException("Claims cannot be a negative number.")
 
     if asset < 0:
         raise NegativeNumberException("Asset cannot be a negative number.")
 
+    # sum of claims is less than the asset (no bankruptcy)
     if sum(claims) <= asset:
         return claims, max(claims)
-    else:
 
-        equal_alloc = asset / len(claims)
+    equal_alloc = asset / len(claims)
 
-        if all(c >= equal_alloc for c in claims):
-            return [equal_alloc for _ in range(len(claims))], equal_alloc
+    if all(c >= equal_alloc for c in claims):
+        return [equal_alloc for _ in range(len(claims))], equal_alloc
 
-        else:
-            r = min(claims)
-            allocations = [r for _ in range(len(claims))]
+    r = min(claims)
+    allocations = [r for _ in range(len(claims))]
 
-            while asset > sum(allocations):
+    while asset > sum(allocations):
+        remained_claims = [c - r for c in claims]
+        r_prime = min(c for c in remained_claims if c > 0)
+        positive_remained_claim_length = len([c for c in remained_claims if c > 0])
 
-                remained_claims = [c - r for c in claims]
+        if asset - (sum(allocations) + r_prime * positive_remained_claim_length) < 0:
+            r_prime = (asset - sum(allocations)) / positive_remained_claim_length
+        
+        allocations = [alloc + r_prime if remained > 0 else alloc for alloc, remained in zip(allocations, remained_claims)]
+        r += r_prime
 
-                # r_prime: the next best amount to allocate to all
-                r_prime = min(c for c in remained_claims if c > 0)
-                positive_remained_claim_length = len(
-                    list(filter(lambda x: (x > 0), remained_claims))
-                )
-
-                if asset - (sum(allocations) + r_prime * positive_remained_claim_length) > 0:
-                    for i in range(len(claims)):
-                        if remained_claims[i] > 0:
-                            allocations[i] += r_prime
-                    r += r_prime
-                else:
-                    # there is not any limitation by claims, so we divide assets equally among remained claims
-                    r_prime = (asset - sum(allocations)) / \
-                              positive_remained_claim_length
-                    for i in range(len(claims)):
-                        if remained_claims[i] > 0:
-                            allocations[i] += r_prime
-                    r += r_prime
-
-            return allocations, r
+    return allocations, r
 
 
 def CEA(claims, asset):
     """
-    equal to the `constrained_equal_awards` function.
+    An alias for the `constrained_equal_awards` function.
     """
     return constrained_equal_awards(claims, asset)
 
 
 def constrained_equal_losses(claims, asset):
     """
-    This function returns a list of allocations based on the constrained equal loss method.
+    Calculate allocations using the constrained equal losses method.
+    
     If the asset is larger than the sum of claims, returns the claims list itself.
 
-    See: https://en.wikipedia.org/wiki/Constrained_equal_losses
+    Parameters
+    ----------
+    claims : list
+        A list of claims. Each element of the list is a non-negative float number.
+    asset : float
+        The total amount of available assets. This is a non-negative number.
 
-    Parameters:
-        claims (list): list of claims (list of non-negative float numbers)
-        asset (float): total amount of our assets (non-negative)
-    Returns:
-        list: list of allocations
-        r: the r value in the $a_i = max(0, c_i-r) $ (if sum of claims become less than asset, then the r-value would be 0.)
+    Returns
+    -------
+    list
+        A list of allocations.
+    float
+        The r value in the equation a_i = max(0, c_i-r). If the sum of claims is less than the asset,
+        then the r-value is 0.
     """
     # checks
     if any(c < 0 for c in claims):
@@ -100,6 +100,24 @@ def constrained_equal_losses(claims, asset):
     if total_loss <= 0:
         return claims, 0
 
-    losses, r = constrained_equal_awards(claims, total_loss)
+    equal_loss = total_loss / len(claims)
+
+    if all(c >= equal_loss for c in claims):
+        return [c - equal_loss for c in claims], equal_loss
+
+    r = min(claims)
+    losses = [r for _ in range(len(claims))]
+
+    while total_loss > sum(losses):
+        remained_claims = [c - r for c in claims]
+        r_prime = min(c for c in remained_claims if c > 0)
+        positive_remained_claim_length = len([c for c in remained_claims if c > 0])
+
+        if total_loss - (sum(losses) + r_prime * positive_remained_claim_length) < 0:
+            r_prime = (total_loss - sum(losses)) / positive_remained_claim_length
+        
+        losses = [alloc + r_prime if remained > 0 else alloc for alloc, remained in zip(losses, remained_claims)]
+        r += r_prime
 
     return [claim - loss for claim, loss in zip(claims, losses)], r
+
