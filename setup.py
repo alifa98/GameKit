@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="gameTheory",
-    version="0.0.9dev",
+    version="0.0.11b", # change manually, create the tag and push it to github
     description="A library for Game Theory",
     long_description=long_description,
     long_description_content_type='text/markdown',
