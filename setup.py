@@ -23,6 +23,6 @@ setup(
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.8.1",
     package_data={"": ["LICENSE"]},
 )
