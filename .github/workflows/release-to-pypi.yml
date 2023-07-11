@@ -7,7 +7,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -24,10 +23,38 @@ jobs:
     - name: Run tests
       run: |
         pytest
-    - name: Build and publish
+    - name: Build
+      run: |
+        python -m build
+    - name: Archive production artifacts
+      run: |
+        tar -zcvf artifacts.tar.gz dist/*
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
+          ${{ join(github.event.commits[*].message, '\n') }}
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: ./artifacts.tar.gz
+        asset_name: artifacts.tar.gz
+        asset_content_type: application/gzip
+
+    - name: Publish to PyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        python -m build
         twine upload dist/*
