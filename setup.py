@@ -1,35 +1,22 @@
 from setuptools import setup, find_packages
-import subprocess
-import os
+from pathlib import Path
 
-# This function gets the tag name from the last successful git tag push
-def get_version():
-    try:
-        version = (
-            subprocess.check_output(["git", "describe", "--tags"])
-            .decode("utf-8")
-            .strip()
-        )
-        if version.startswith("v"):
-            version = version[1:]
-        return version
-    except Exception:
-        return "0.0.0"
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="gameTheory",
-    version=get_version(),
+    version="0.0.6dev",
     description="A library for Game Theory",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     url="https://github.com/alifa98/GameKit",
     author="Ali Faraji",
     author_email="ali@faraji.info",
     license="GPLv3",
-    packages=find_packages(exclude=["gamekit*.tests.*", "tests.*"]),
+    packages=find_packages(exclude=["tests*"]),
     include_package_data=True,
-    install_requires=[
-        "pytest~=7.1.2",
-        "setuptools~=63.1.0"
-    ],
+    install_requires=[],
     classifiers=[
         "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: Python :: 3",

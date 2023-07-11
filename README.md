@@ -23,4 +23,4 @@ Our primary source is  **Game Theory, Alive** book [online version](https://home
 You can open a new discussion in this repository's `Discussion` section for any question.
 https://github.com/alifa98/GameKit/discussions
 
-If you want to contact us by email, you can send your feedback, question, proposal, or requests to ali@01d.ir.
+If you want to contact us by email, you can send your feedback, question, proposal, or requests to ali@faraji.info
