@@ -5,7 +5,7 @@ division rules for solving bankruptcy problem.
 from gamekit import NegativeNumberException
 
 
-def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
+def constrained_equal_awards(claims, asset):
     """
     This function returns a list of allocations based on the constrained equal allocation method.
     If the asset is larger than the sum of claims, returns the claims list itself.
@@ -67,14 +67,14 @@ def constrained_equal_awards(claims: list, asset: float) -> tuple[list, float]:
             return allocations, r
 
 
-def CEA(claims: list, asset: float) -> tuple[list, float]:
+def CEA(claims, asset):
     """
     equal to the `constrained_equal_awards` function.
     """
     return constrained_equal_awards(claims, asset)
 
 
-def constrained_equal_losses(claims: list, asset: float) -> tuple[list, float]:
+def constrained_equal_losses(claims, asset):
     """
     This function returns a list of allocations based on the constrained equal loss method.
     If the asset is larger than the sum of claims, returns the claims list itself.
