@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setup(
     name="gameTheory",
-    version="0.0.6dev",
+    version="0.0.7dev",
     description="A library for Game Theory",
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -23,6 +23,6 @@ setup(
         "Operating System :: OS Independent",
         "Intended Audience :: Science/Research",
     ],
-    python_requires=">=3.8.1",
+    python_requires=">=3.9",
     package_data={"": ["LICENSE"]},
 )
