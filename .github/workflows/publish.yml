@@ -31,7 +31,7 @@ jobs:
         tar -zcvf artifacts.tar.gz dist/*
 
     - name: Fetch all tags
-      run: git fetch --tags
+      run: git fetch --tags --force
       
     - name: Get the previous tag
       id: previous_tag
