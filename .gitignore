@@ -234,3 +234,6 @@ fabric.properties
 
 # whole .idea
 .idea/**
+
+# macos
+.DS_Store
