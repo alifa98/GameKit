@@ -1,6 +1,5 @@
 # To-Do list
 
-
 - [ ] Stable Matching: Implement the Gale-Shapley algorithm
 - [ ] Voting: Implement the Borda Count method
 - [ ] Voting: Implement the Plurality method
