@@ -1,7 +1,7 @@
 import pytest
 
-from gamekit.algorithms.bankruptcy import *
-from gamekit import NegativeNumberException
+from game_theory.algorithms.bankruptcy import *
+from game_theory import NegativeNumberException
 
 
 def test_constrained_equal_awards_two_person_equal():
