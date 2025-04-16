@@ -28,7 +28,6 @@ print(allocations, r)
 
 Note: Currently, this repository is under development.
 
-
 ## What do you mean by a library for game theory?
 
 In game theory, we deal with problems like finding equilibrium, evolutionarily stable strategies, stable matching, fair division, bankruptcy, voting, etc. In this package, we are implementing the algorithms proposed for these problems. For example, a function that finds the stable matching for marriage problem with the Gale-Shapley algorithm.
@@ -42,6 +41,20 @@ Also look at the [TODO](todo.md) list for the next features or improvements.
 
 - [Game Theory, Alive](https://homes.cs.washington.edu/~karlin/GameTheoryBook.pdf)
 - Any other game theory book
+
+## Build and Test
+
+To build the package, you can use the following command:
+
+```bash
+python3 -m build
+```
+
+To test the package, you can use the following command:
+
+```bash
+pytest
+```
 
 ## How can I contact you?
 
