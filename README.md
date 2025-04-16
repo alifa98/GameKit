@@ -1,5 +1,8 @@
 # GameKit
 
+[![PyTests](https://github.com/alifa98/GameKit/actions/workflows/python-testrun.yml/badge.svg)](https://github.com/alifa98/GameKit/actions/workflows/python-testrun.yml)
+[![Publish Python Package](https://github.com/alifa98/GameKit/actions/workflows/publish.yml/badge.svg)](https://github.com/alifa98/GameKit/actions/workflows/publish.yml)
+
 ## What is this?
 
 This is a python package for game theory-related algorithms.
