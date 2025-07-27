@@ -2,7 +2,6 @@ import pytest
 
 from game_theory import NegativeNumberException
 from game_theory.algorithms.auction import (
-    VCG_combinatorial_auction,
     first_price_auction,
     generalized_second_price_auction,
     second_price_auction,
