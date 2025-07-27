@@ -130,3 +130,19 @@ def constrained_equal_losses(claims, asset):
         r += r_prime
 
     return [claim - loss for claim, loss in zip(claims, losses)], r
+
+
+def CEL(claims, asset):
+    """
+    Calculate allocations using the constrained equal losses method.
+    If the asset is larger than the sum of claims, returns the claims list itself.
+
+    Raises:
+        NegativeNumberException: Claims cannot be a negative number.
+
+    Returns:
+        list: A list of allocations.
+        float: The r value in the equation a_i = max(0, c_i-r). If the sum of claims is less than the asset,
+        then the r-value is 0.
+    """
+    return constrained_equal_losses(claims, asset)

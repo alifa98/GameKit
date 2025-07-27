@@ -1,7 +1,10 @@
 import pytest
 
-from game_theory.algorithms.bankruptcy import *
 from game_theory import NegativeNumberException
+from game_theory.algorithms.bankruptcy import (
+    constrained_equal_awards,
+    constrained_equal_losses,
+)
 
 
 def test_constrained_equal_awards_two_person_equal():
@@ -50,14 +53,18 @@ def test_constrained_equal_awards_same_allocation():
 
 
 def test_constrained_equal_awards_non_negative_asset():
-    with pytest.raises(NegativeNumberException, match="Asset cannot be a negative number."):
+    with pytest.raises(
+        NegativeNumberException, match="Asset cannot be a negative number."
+    ):
         claims = [50, 24, 68]
         asset = -25
         constrained_equal_awards(claims, asset)
 
 
 def test_constrained_equal_awards_non_negative_claims():
-    with pytest.raises(NegativeNumberException, match="Claims cannot be a negative number."):
+    with pytest.raises(
+        NegativeNumberException, match="Claims cannot be a negative number."
+    ):
         claims = [50, -24, 68]
         asset = 25
         constrained_equal_awards(claims, asset)
@@ -112,14 +119,18 @@ def test_constrained_equal_losses_three_person_same_allocation():
 
 
 def test_constrained_equal_losses_non_negative_asset():
-    with pytest.raises(NegativeNumberException, match="Asset cannot be a negative number."):
+    with pytest.raises(
+        NegativeNumberException, match="Asset cannot be a negative number."
+    ):
         claims = [50, 24, 68]
         asset = -25
         constrained_equal_losses(claims, asset)
 
 
 def test_constrained_equal_losses_non_negative_claims():
-    with pytest.raises(NegativeNumberException, match="Claims cannot be a negative number."):
+    with pytest.raises(
+        NegativeNumberException, match="Claims cannot be a negative number."
+    ):
         claims = [50, -24, 68]
         asset = 25
         constrained_equal_losses(claims, asset)
