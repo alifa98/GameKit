@@ -56,6 +56,17 @@ To test the package, you can use the following command:
 pytest
 ```
 
+To enable style checks before every commit, install the development dependencies and
+set up the git pre-commit hook:
+
+```bash
+pip install -r requirements-dev.txt
+pre-commit install
+```
+
+Then pre-commit will run `flake8` as a check-only step. It reports failures and
+does not automatically rewrite files.
+
 ## How can I contact you?
 
 You can open a new discussion in this repository's [Discussion](https://github.com/alifa98/GameKit/discussions) section for any question.
